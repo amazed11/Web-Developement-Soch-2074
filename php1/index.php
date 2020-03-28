@@ -36,15 +36,15 @@ style="background:url('images/dd.gif') no-repeat">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
   <!-- form-start-login -->
-  <form>
+  <form action="login_check.php" method="post">
   <div class="form-group">
     <label for="exampleInputEmail1" class="text-white">Username</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username">
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" placeholder="Enter your email...">
    
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1" class="text-white">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Enter your password...">
   </div>
  
   <button type="submit" class="btn btn-success" name="submitbtn">Submit</button>
