@@ -1,8 +1,10 @@
 
 <?php
 session_start();
+$_SESSION['info']="Please login first";
 if($_SESSION['username']==null){
 header("location:index.php");
+$_SESSION['username']='';
 }
 ?>
 
@@ -39,12 +41,16 @@ header("location:index.php");
         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Products
         </a>
+
         <div class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
           <a class="dropdown-item " href="addproduct.php" data-target="#exampleModalCenter" data-toggle="modal">Add Products</a>
           <a class="dropdown-item " href="#">Update Products</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item " href="#">Delete Products</a>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Welcome, <?php echo $_SESSION['username']; ?></a>
       </li>
     
     </ul>
@@ -116,10 +122,20 @@ header("location:index.php");
   </div>
 </div>
 </div>
+<div class="container">
+  <div class="row jumbotron">
+      <div class="form-inline">
+        <label for="searchtext">Search</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="search" id="searchtext" class="form-control">
+        </label>
+      </div>
+  </div>
+</div>
+
 <!-- table start -->
 <div class="row mt-5">
   <div class="col-md-12">
-    <table class="table table-bordered table-light table-striped shadow">
+    <table class="table table-bordered table-light table-striped shadow" id="table_data">
       <thead class="bg-dark text-white">
         <tr>
           <th>ID</th>
@@ -135,11 +151,7 @@ header("location:index.php");
     require_once 'config.php';
     $sql ="select * from productinfo";
     $res=mysqli_query($con,$sql);
-    while($row=mysqli_fetch_array($res)){
-
-     
-      
-      
+    while($row=mysqli_fetch_array($res)){ 
       ?>
       
       <tbody>
@@ -159,7 +171,33 @@ header("location:index.php");
 </div>
 <!-- table end -->
 </div>
-<?php require_once 'bootstrap/js.php'; ?>
+<?php include 'bootstrap/js.php'; ?>
+<script>
+
+$(document).ready(function(){
+  $("#searchtext").keyup(function(){
+    //to get the value from the search text box
+    var searchvalue=$(this).val();
+    
+    //use ajax for sending value to database
+    $.ajax({
+      url:"search.php",
+      method:"post",
+      data:{
+        query:searchvalue
+      },
+      success:function(response){
+        $("#table_data").html(response);
+      }
+
+
+    });
+
+  });
+});
+
+</script>
+
 </body>
 </html>
  
