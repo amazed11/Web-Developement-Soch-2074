@@ -5,7 +5,7 @@ session_start();
 require_once 'config.php';
 $user=$_POST['username'];
 $pass=$_POST['password'];
-$sql= "select * from logininfo where username ='$user'";
+$sql= "select * from logininfo where username ='$user' and status='active'";
 $run=mysqli_query($con,$sql);
 if(mysqli_num_rows($run) > 0){
 while($row=mysqli_fetch_array($run)){

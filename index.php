@@ -19,6 +19,7 @@ style="background:url('images/dd.gif') no-repeat">
   
 </div> 
 <!-- top row end -->
+
 <div class="col-md-4 m-auto d-block">
 <div class="jumbotron mt-3" style="background:linear-gradient(to right ,red,purple);">
 <h1 class="text-white">Join us</h1>
@@ -34,7 +35,13 @@ style="background:url('images/dd.gif') no-repeat">
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-
+    <div class="text-white bg-success text-center rounded">
+        <?php
+        session_start();
+            echo $_SESSION['info'];
+        
+        ?>
+    </div>
   <!-- form-start-login -->
   <form action="login_check.php" method="post">
   <div class="form-group">
@@ -53,7 +60,7 @@ style="background:url('images/dd.gif') no-repeat">
   </div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
       <!-- form-start-register -->
-      <form action="register.php" method="post">
+      <form action="<?php  echo htmlentities("register.php");?>" method="post">
   <div class="form-group">
     <label for="user" class="text-white">Username</label>
     <input type="email" class="form-control" id="user" aria-describedby="emailHelp" name="username">
